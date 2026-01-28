@@ -1,15 +1,25 @@
+const express = require("express");
+const connectDB = require("./config/config");
 
-const express = require('express');
+const taskRoutes = require("./routes/tasks");
+
+require("dotenv").config();
+
 const app = express();
-const PORT = 8080;
-const { dbConnection } = require('./config/config');
-
 app.use(express.json());
 
-app.use('/', routes);
+
+connectDB()
+
+app.use("/tasks", taskRoutes);
+
+
+const PORT = process.env.PORT || 7000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+});
 
 
 
-dbConnection();
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

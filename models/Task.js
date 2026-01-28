@@ -1,11 +1,18 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
-}, { timestamps: true });
+const taskSchema = new mongoose.Schema(
+    {
+        title: {
+            type:String,
+            required: true,
+            trim: true,
+        },
+        completed: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    {timestamps: true}
+);
 
-const User = mongoose.model('User', UserSchema);
-
-module.exports = User;
+module.exports = mongoose.model("Task", taskSchema);
